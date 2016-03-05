@@ -24,7 +24,7 @@
         
 	$ds	= DIRECTORY_SEPARATOR;
 	$in     = __DIR__ . $ds . $opts[ 'input' ];
-	$files	= is_dir( $in )? scandir( $in ) : array( $in );
+	$files	= is_dir( $in )? scandir( $in ) : array( $opts[ 'input' ] );
 	$now    = new \Datetime( 'now' );
 	$fmt    = new \IntlDateFormatter(
                     \Locale::getDefault(),
@@ -39,7 +39,7 @@
 	$newContent = '';
 	foreach( $files as $file ) {
 		if( in_array( $file, array( '.', '..', $argv[ 0 ] ) ) ) { continue; }
-		$filePath = $in . $ds . $file;
+		$filePath = is_dir( $in )? $in . $ds . $file : $file;
 		if( file_exists( $filePath ) ) {
                         //Skip directories
                         if( is_dir( $filePath ) ) { continue; }
