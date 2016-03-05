@@ -33,7 +33,8 @@
                     date_default_timezone_get(),
                     \IntlDateFormatter::GREGORIAN
                 );
-	$out	= is_dir( $opts[ 'output' ] )? $opts[ 'output' ]. $ds . 'cccam_lines['.$now->format().'].cfg' : $opts[ 'output' ];
+        $f = preg_replace( '/[^A-Za-z0-9_\-]/', '_', $fmt->format( $now ) );
+	$out	= is_dir( $opts[ 'output' ] )? $opts[ 'output' ]. $ds . 'cccam_lines['.$f.'].cfg' : $opts[ 'output' ];
 
 	$newContent = '';
 	foreach( $files as $file ) {
